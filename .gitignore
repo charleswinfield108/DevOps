@@ -1,0 +1,6 @@
+node_modules/
+CodeBloggs/node_modules/
+CodeBloggs/client/node_modules/
+CodeBloggs/server/node_modules/
+.env
+.DS_Store
