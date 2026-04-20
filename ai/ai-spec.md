@@ -327,172 +327,32 @@ A feature or refactor is considered **done** when all of the following are true:
 
 ## 13. Lighthouse Auditing Requirements
 
-### Audit Configuration
+Full audit workflow, file naming conventions, comparison document format, and external benchmark rules are defined in the dedicated spec:
 
-All Lighthouse audits must be run with the following settings — results are invalid if these are not applied:
+> **See:** [lighthouse.feature.md](./features/lighthouse.feature.md)
 
-| Setting | Value |
-|---|---|
-| Tool | Chrome DevTools (Lighthouse tab) |
-| Mode | Navigation |
-| Device | Desktop |
-| Categories | Performance, Accessibility, Best Practices, SEO |
-
-### Track 1 — CodeBloggs (Localhost)
-
-#### Pages to Audit
-- Login Page (`http://localhost:3000/login`)
-- Home Page (`http://localhost:3000/home`)
-
-#### Process
-
-**Step 1 — v1 Baseline**
-- Run Lighthouse on the Login page. Save the report as `./Lighthouse/v1/login-v1.html`
-- Run Lighthouse on the Home page. Save the report as `./Lighthouse/v1/home-v1.html`
-- Do not make any code changes before saving v1 reports
-
-**Step 2 — Refactor**
-- Refactor the Login page using `./ai/features/login-page.feature.md` and the v1 findings
-- Refactor the Home page using `./ai/features/home-page.feature.md` and the v1 findings
-- Every code change must be traceable to a specific Lighthouse recommendation
-
-**Step 3 — v2 Re-audit**
-- Run Lighthouse on the refactored Login page. Save as `./Lighthouse/v2/login-v2.html`
-- Run Lighthouse on the refactored Home page. Save as `./Lighthouse/v2/home-v2.html`
-- v2 reports must show measurable improvement over v1 in at least one category per page
-
-**Step 4 — Comparison Document**
-- Write a professional comparison document for both pages (v1 vs. v2)
-- Save as `./Lighthouse/lighthouse-comparison.md`
-- Include: score table for each category, summary of what changed, what caused the improvement
-
-### Track 2 — External Website Benchmark
-
-#### Requirements
-- Choose any publicly accessible external website that has both a login page and a home/landing page
-- Document the chosen website clearly in the benchmark report
-
-#### Process
-
-**Step 1 — External Audit**
-- Run Lighthouse on the external site's login page. Save as `./Lighthouse/benchmark/external-login.html`
-- Run Lighthouse on the external site's home page. Save as `./Lighthouse/benchmark/external-home.html`
-
-**Step 2 — Benchmark Comparison Document**
-- Compare CodeBloggs v1 vs. the external site (pre-refactor benchmark)
-- Compare CodeBloggs v2 vs. the external site (post-refactor benchmark)
-- Save as `./Lighthouse/benchmark/benchmark-comparison.md`
-- Include a score table for each category and a written analysis
-
-### Lighthouse File Structure
-
-```
-Lighthouse/
-├── v1/
-│   ├── login-v1.html
-│   └── home-v1.html
-├── v2/
-│   ├── login-v2.html
-│   └── home-v2.html
-├── benchmark/
-│   ├── external-login.html
-│   ├── external-home.html
-│   └── benchmark-comparison.md
-└── lighthouse-comparison.md
-```
+**Summary:**
+- Audit config: Chrome DevTools · Navigation mode · Desktop device
+- Pages: Login (`/login`) and Home (`/home`)
+- Process: v1 baseline → refactor → v2 re-audit → comparison document
+- External benchmark: chosen site audited and compared against CodeBloggs v1 and v2
+- All reports saved as `.html` files under `./Lighthouse/`
 
 ---
 
 ## 14. Selenium Testing Requirements
 
-### Configuration
+Full test category definitions, per-test acceptance criteria, and `.side` file requirements are defined in the dedicated spec:
 
-- All tests must be written and exported from **Selenium IDE**
-- All tests must be saved in a **single `.side` file**: `./Selenium/codebloggs-tests.side`
-- The base URL for all tests is `http://localhost:3000`
+> **See:** [selenium.feature.md](./features/selenium.feature.md)
+
+**Summary:**
+- Tool: Selenium IDE browser extension
+- Base URL: `http://localhost:3000`
+- Minimum: 10 tests across 5 categories
+- All tests in a single file: `./Selenium/codebloggs-tests.side`
+- Categories: Navigation, Form Submission, Form Validation, Responsiveness, Repetitive Tasks
 - All tests must pass before submission
-
-### Required Test Categories (10+ tests across 5 categories)
-
----
-
-#### Category 1 — Navigation
-
-**Goal:** Automate visiting multiple pages, clicking links, and verifying the correct page loads.
-
-**Tests to include:**
-- Navigate to the Login page and verify it loads
-- Navigate to the Register page via the "Register now" link on Login
-- Log in and verify redirect to `/home`
-- Click the Bloggs nav link and verify the Bloggs feed loads
-- Click the Network nav link and verify the Network page loads
-
-**Verification:** Assert that the correct page heading or URL is present after each navigation action.
-
----
-
-#### Category 2 — Filling Out Forms and Submitting Data
-
-**Goal:** Automate inputting text into forms, submitting, and verifying the outcome.
-
-**Tests to include:**
-- Fill in the login form with valid credentials and submit — verify successful login
-- Fill in the registration form with all required fields and submit — verify account creation
-- Fill in the Post Modal with content and submit — verify the new post appears
-
-**Verification:** Assert success state (redirect, toast message, or new content visible in DOM).
-
----
-
-#### Category 3 — Form Validation
-
-**Goal:** Test that forms correctly reject invalid or incomplete input and display appropriate error messages.
-
-**Tests to include:**
-- Submit the login form with empty email — verify error message appears
-- Submit the login form with empty password — verify error message appears
-- Submit the login form with an invalid email format — verify error message appears
-- Submit the login form with incorrect credentials — verify generic error message
-- Submit the Post Modal with empty content — verify submission is blocked
-
-**Verification:** Assert that error messages are visible in the DOM and the form has not navigated away.
-
----
-
-#### Category 4 — Responsiveness and Cross-Browser Compatibility
-
-**Goal:** Verify layout and functionality across different viewport sizes.
-
-**Tests to include:**
-- Set viewport to desktop width (≥768px) — verify two-column layout on Home page
-- Set viewport to mobile width (<768px) — verify single-column layout on Home page
-- Verify that the mobile navigation renders correctly at mobile breakpoint
-- Verify that the Login form is centred and usable at mobile breakpoint
-
-**Verification:** Assert that key layout elements are visible and correctly positioned at each breakpoint.
-
----
-
-#### Category 5 — Automating Repetitive Tasks
-
-**Goal:** Automate common multi-step workflows to reduce manual effort.
-
-**Tests to include:**
-- Full login flow: open app → fill credentials → submit → verify home page loads
-- Full logout flow: log in → click user menu → click logout → verify redirect to login
-- Create a new post: log in → click Post button → fill content → submit → verify post appears
-- Create a new user: navigate to register → fill all fields → submit → verify login with new credentials
-
-**Verification:** Assert the final expected state after each complete workflow.
-
----
-
-### Selenium File Structure
-
-```
-Selenium/
-└── codebloggs-tests.side
-```
 
 ---
 
@@ -504,3 +364,5 @@ All feature specs live in `./ai/features/`. Each spec references this document a
 |---|---|---|
 | Login Page — Lighthouse Refactor | [login-page.feature.md](./features/login-page.feature.md) | Ready |
 | Home Page — Lighthouse Refactor | [home-page.feature.md](./features/home-page.feature.md) | Ready |
+| Lighthouse Auditing | [lighthouse.feature.md](./features/lighthouse.feature.md) | Ready |
+| Selenium Automated Testing | [selenium.feature.md](./features/selenium.feature.md) | Ready |
