@@ -82,16 +82,11 @@ const Home = () => {
     }
 
     try {
-      // Fetch all users to find the target user
-      const usersResponse = await fetch("http://localhost:5050/users?limit=1000", {
+      const userResponse = await fetch(`http://localhost:5050/user/${targetUserId}`, {
         credentials: "include",
       });
-      const usersData = await usersResponse.json();
-      
-      let targetUser = null;
-      if (usersData.users && Array.isArray(usersData.users)) {
-        targetUser = usersData.users.find((u) => u._id === targetUserId);
-      }
+      const userData = await userResponse.json();
+      const targetUser = userData.data || null;
 
       if (!targetUser) {
         showToast("User not found", "error");
@@ -129,7 +124,6 @@ const Home = () => {
         }
       }
     } catch (error) {
-      console.error("Error fetching posts:", error);
       showToast("Error loading user data", "error");
     } finally {
       setLoading(false);
@@ -188,7 +182,6 @@ const Home = () => {
         body: JSON.stringify({ likes: newLikeCount }),
       });
     } catch (error) {
-      console.error("Error updating post likes:", error);
       // Revert on error
       const revertedLikes = new Set(likedPosts);
       if (isCurrentlyLiked) {
@@ -257,7 +250,6 @@ const Home = () => {
       setCommentInputs((prev) => ({ ...prev, [postId]: "" }));
       setOpenCommentModal(null);
     } catch (error) {
-      console.error("Error creating comment:", error);
     } finally {
       setCreatingComment((prev) => ({ ...prev, [postId]: false }));
     }
@@ -297,9 +289,9 @@ const Home = () => {
               lastName={viewingUser?.last_name}
               size={64}
             />
-            <h2 style={{ color: "#1F2340", fontSize: isDesktop ? "0.9rem" : "0.85rem", margin: 0, textAlign: "center" }}>
+            <p style={{ color: "#1F2340", fontSize: isDesktop ? "0.9rem" : "0.85rem", margin: 0, textAlign: "center", fontWeight: "600" }}>
               {viewingUser?.first_name} {viewingUser?.last_name}
-            </h2>
+            </p>
           </div>
 
           {/* User Status Section */}
@@ -390,7 +382,8 @@ const Home = () => {
                   LOGIN STATUS
                 </p>
                 <p style={{ color: "#1F2340", fontSize: "0.75rem", margin: 0, fontWeight: "500" }}>
-                  {viewingUser?.isOnline ? "🟢" : "🔴"} {viewingUser?.isOnline ? "Online" : "Offline"}
+                  <span aria-hidden="true">{viewingUser?.isOnline ? "🟢" : "🔴"}</span>{" "}
+                  {viewingUser?.isOnline ? "Online" : "Offline"}
                 </p>
               </div>
             </div>
@@ -400,9 +393,9 @@ const Home = () => {
         {/* Right Column - Posts List with Scrollbar */}
         <div style={{ flex: isDesktop ? 1 : "0 0 auto", display: "flex", flexDirection: "column", minHeight: 0, overflow: isDesktop ? "hidden" : "visible" }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "0.75rem", flexShrink: 0, paddingBottom: "0.75rem", borderBottom: "1px solid #E0E0E0" }}>
-            <h2 style={{ color: "#8D88EA", fontSize: isDesktop ? "1.25rem" : "1rem", margin: 0 }}>
+            <h1 style={{ color: "#8D88EA", fontSize: isDesktop ? "1.25rem" : "1rem", margin: 0 }}>
               {viewingUser?.first_name}'s Posts
-            </h2>
+            </h1>
           </div>
 
           {loading && (
@@ -423,7 +416,7 @@ const Home = () => {
               {userPosts
                 .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
                 .map((post) => (
-                  <div
+                  <article
                     key={post._id}
                     style={{
                       backgroundColor: "#FCFDFE",
@@ -465,6 +458,7 @@ const Home = () => {
                     </p>
                     <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
                       <button
+                        aria-label={likedPosts.has(post._id) ? "Unlike post" : "Like post"}
                         onClick={() => handleLikePost(post._id, post.likes)}
                         style={{
                           display: "flex",
@@ -497,6 +491,7 @@ const Home = () => {
                         <span>{post.likes}</span>
                       </button>
                       <button
+                        aria-label="View comments"
                         onClick={() => setOpenCommentModal(post._id)}
                         style={{
                           display: "flex",
@@ -636,7 +631,7 @@ const Home = () => {
                         </p>
                       </div>
                     )}
-                  </div>
+                  </article>
                 ))}
             </div>
           )}
@@ -694,6 +689,9 @@ const Home = () => {
           onClick={() => setOpenCommentModal(null)}
         >
           <div
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="comment-modal-title"
             style={{
               backgroundColor: "#FFFFFF",
               borderRadius: "12px",
@@ -717,10 +715,11 @@ const Home = () => {
                 alignItems: "center",
               }}
             >
-              <h2 style={{ fontSize: "1.2rem", margin: 0, color: "#1F2340" }}>
+              <h2 id="comment-modal-title" style={{ fontSize: "1.2rem", margin: 0, color: "#1F2340" }}>
                 Comments
               </h2>
               <button
+                aria-label="Close comments modal"
                 onClick={() => setOpenCommentModal(null)}
                 style={{
                   backgroundColor: "transparent",
@@ -824,7 +823,14 @@ const Home = () => {
                 borderTop: "1px solid #E3E6F5",
               }}
             >
+              <label
+                htmlFor="comment-input"
+                style={{ position: "absolute", width: "1px", height: "1px", overflow: "hidden", clip: "rect(0,0,0,0)", whiteSpace: "nowrap" }}
+              >
+                Write a comment
+              </label>
               <textarea
+                id="comment-input"
                 placeholder="Write a comment..."
                 value={commentInputs[openCommentModal] || ""}
                 onChange={(e) =>
@@ -843,7 +849,7 @@ const Home = () => {
                   resize: "none",
                   height: "80px",
                   boxSizing: "border-box",
-                  fontColor: "#1F2340",
+                  color: "#1F2340",
                   transition: "all 0.3s ease",
                 }}
                 onFocus={(e) => {
