@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useSession } from "../context/SessionContext";
 import logo from "../assets/CodeBloggs_ logo.png";
 
@@ -153,7 +153,6 @@ const Login = () => {
       // Redirect to home page on successful login
       navigate("/home");
     } catch (err) {
-      console.error("Login error:", err);
       setError("An error occurred. Please try again.");
       setIsSubmitting(false);
     }
@@ -161,17 +160,7 @@ const Login = () => {
 
   return (
     <>
-      <style>{`
-        @keyframes float {
-          0%, 100% {
-            transform: translateY(0px);
-          }
-          50% {
-            transform: translateY(-20px);
-          }
-        }
-      `}</style>
-      <div style={{
+      <main style={{
         height: "100vh",
         display: "flex",
         flexDirection: "column",
@@ -191,6 +180,8 @@ const Login = () => {
           <img
             src={logo}
             alt="CodeBloggs Logo"
+            width={isDesktop ? 200 : 150}
+            height={isDesktop ? 40 : 30}
             style={{
               height: isDesktop ? "40px" : "30px",
               objectFit: "contain",
@@ -349,6 +340,7 @@ const Login = () => {
                 />
                 <button
                   type="button"
+                  aria-label={showPassword ? "Hide password" : "Show password"}
                   onClick={() => setShowPassword(!showPassword)}
                   style={{
                     position: "absolute",
@@ -378,7 +370,10 @@ const Login = () => {
 
             {/* Error Message */}
             {error && (
-              <div style={{
+              <div
+                role="alert"
+                aria-live="polite"
+                style={{
                 marginBottom: "0.55rem",
                 padding: "0.66rem 0.88rem",
                 backgroundColor: "#FEF2F2",
@@ -405,6 +400,7 @@ const Login = () => {
             <button
               type="submit"
               disabled={isSubmitting}
+              aria-busy={isSubmitting}
               style={{
                 width: "100%",
                 backgroundColor: isSubmitting ? "#B1ADFF" : "#8D88EA",
@@ -437,30 +433,25 @@ const Login = () => {
               marginBottom: 0,
             }}>
               Not a member?{" "}
-              <button
-                type="button"
-                onClick={() => navigate("/register")}
+              <Link
+                to="/register"
                 style={{
                   color: "#8D88EA",
                   fontWeight: "600",
-                  background: "none",
-                  border: "none",
-                  cursor: "pointer",
                   textDecoration: "none",
                   fontSize: "0.85rem",
                   transition: "all 0.2s ease",
-                  padding: "0",
                 }}
                 onMouseEnter={(e) => (e.target.style.color = "#6E6AB8", e.target.style.textDecoration = "underline")}
                 onMouseLeave={(e) => (e.target.style.color = "#8D88EA", e.target.style.textDecoration = "none")}
               >
                 Register now
-              </button>
+              </Link>
             </p>
           </form>
         </div>
         </div>
-      </div>
+      </main>
     </>
   );
 };
