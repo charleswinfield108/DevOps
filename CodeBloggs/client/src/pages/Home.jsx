@@ -458,7 +458,7 @@ const Home = () => {
                     </p>
                     <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
                       <button
-                        aria-label={likedPosts.has(post._id) ? "Unlike post" : "Like post"}
+                        aria-label={`${likedPosts.has(post._id) ? "Unlike" : "Like"} post, ${post.likes} likes`}
                         onClick={() => handleLikePost(post._id, post.likes)}
                         style={{
                           display: "flex",
@@ -491,7 +491,7 @@ const Home = () => {
                         <span>{post.likes}</span>
                       </button>
                       <button
-                        aria-label="View comments"
+                        aria-label={`View comments, ${post.comments?.length || 0} comments`}
                         onClick={() => setOpenCommentModal(post._id)}
                         style={{
                           display: "flex",
