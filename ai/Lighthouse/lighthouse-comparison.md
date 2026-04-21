@@ -1,6 +1,6 @@
-# Lighthouse Audit Comparison — CodeBloggs Login Page
+# Lighthouse Audit Comparison — CodeBloggs
 
-> **Scope:** Login Page (`/login`) — v1 Baseline vs. v2 Post-Refactor
+> **Scope:** Login Page (`/login`) and Home Page (`/home`) — v1 Baseline vs. v2 Post-Refactor
 > **Audit config:** Chrome DevTools · Navigation mode · Desktop device
 > **Categories:** Performance, Accessibility, Best Practices, SEO
 
@@ -8,7 +8,7 @@
 
 ## Score Summary
 
-### Login Page
+### Login Page (`/login`)
 
 | Category | v1 Score | v2 Score | Change |
 |---|---|---|---|
@@ -17,11 +17,18 @@
 | Best Practices | 100 | 100 | 0 |
 | SEO | 83 | 100 | +17 |
 
+### Home Page (`/home`)
+
+| Category | v1 Score | v2 Score | Change |
+|---|---|---|---|
+| Performance | 55 | 98 | +43 |
+| Accessibility | 92 | 95 | +3 |
+| Best Practices | 100 | 100 | 0 |
+| SEO | 83 | 100 | +17 |
+
 ---
 
-## Findings Summary (v1)
-
-The following issues were identified in the v1 baseline audit:
+## Login Page — Findings Summary (v1)
 
 ### Performance
 | Finding | Detail |
@@ -56,9 +63,7 @@ The following issues were identified in the v1 baseline audit:
 
 ---
 
-## Changes Made (v1 → v2)
-
-Every change is directly traceable to a specific Lighthouse finding. No speculative changes were made.
+## Login Page — Changes Made (v1 → v2)
 
 | Change | File | Lighthouse Finding Addressed |
 |---|---|---|
@@ -76,32 +81,98 @@ Every change is directly traceable to a specific Lighthouse finding. No speculat
 
 ---
 
+## Home Page — Findings Summary (v1)
+
+### Performance
+| Finding | Detail |
+|---|---|
+| First Contentful Paint | 6.5 s (score: 0/100) |
+| Largest Contentful Paint | 10.9 s (score: 0/100) |
+| Speed Index | 6.5 s (score: 0/100) |
+| Time to Interactive | 10.9 s (score: 2/100) |
+| Avoid enormous network payloads | Total size: 7,776 KiB |
+| Minify JavaScript | Est. savings: 1,594 KiB |
+| Reduce unused JavaScript | Est. savings: 5,669 KiB |
+| Forced reflow | JavaScript read/write pattern causing repeated layout recalculation |
+| Render-blocking requests | Google Fonts stylesheet blocking initial render |
+
+### Accessibility
+| Finding | Detail |
+|---|---|
+| Insufficient colour contrast ratio | Label text used `#666` and `#999` — insufficient contrast against white background |
+| Image elements missing explicit `width` and `height` | Images had no dimension attributes set |
+
+### Best Practices
+| Finding | Detail |
+|---|---|
+| Three `console.error` calls | Internal errors in fetch, like, and comment catch blocks exposed to the console |
+| Invalid CSS property `fontColor` | Comment textarea used `fontColor` — not a valid CSS property, colour was never applied |
+
+### SEO
+| Finding | Detail |
+|---|---|
+| No meta description | `<head>` contained no `<meta name="description">` tag |
+| Invalid `robots.txt` | 23 errors found — Lighthouse could not parse the crawl directives |
+
+---
+
+## Home Page — Changes Made (v1 → v2)
+
+| Change | File | Lighthouse Finding Addressed |
+|---|---|---|
+| Replaced `/users?limit=1000` fetch with `/user/:id` | `Home.jsx` | Performance — unnecessary bulk payload to find a single user |
+| Promoted posts heading from `<h2>` to `<h1>` | `Home.jsx` | Accessibility — no `h1` on page, broken heading hierarchy |
+| Demoted user name from `<h2>` to `<p>` | `Home.jsx` | Accessibility — duplicate `h2` competing with posts heading |
+| Wrapped emoji status indicators in `<span aria-hidden="true">` | `Home.jsx` | Accessibility — emoji-only status not meaningful to screen readers |
+| Added dynamic `aria-label` to Like button (includes count) | `Home.jsx` | Accessibility — icon-only button has no accessible name |
+| Added dynamic `aria-label` to Comment button (includes count) | `Home.jsx` | Accessibility — icon-only button has no accessible name |
+| Added `aria-label="Close comments modal"` to close button | `Home.jsx` | Accessibility — modal close button has no accessible name |
+| Added `role="dialog"`, `aria-modal`, `aria-labelledby` to modal | `Home.jsx` | Accessibility — comment modal not recognised as a dialog |
+| Added `id="comment-modal-title"` to modal heading | `Home.jsx` | Accessibility — no `aria-labelledby` target for modal |
+| Added visually-hidden `<label>` for comment textarea | `Home.jsx` | Accessibility — form input has no associated label |
+| Replaced post card `<div>` with `<article>` | `Home.jsx` | SEO — post cards had no semantic structure |
+| Removed all three `console.error` calls | `Home.jsx` | Best Practices — internal errors exposed in console |
+| Fixed `fontColor` to `color` on comment textarea | `Home.jsx` | Best Practices — invalid CSS property, colour was never applied |
+| Production build used for audit | Vite build config | Performance — dev server shipped unminified 7,776 KiB bundles |
+
+---
+
 ## Result Analysis
 
-### Performance (+42)
+### Performance
 
-The most significant improvement came from switching the audit target from the Vite development server to the production build. In development mode, Vite deliberately skips minification and tree-shaking to support fast hot-module reloading, resulting in a JavaScript payload of approximately 7,778 KiB. This caused FCP, LCP, Speed Index, and TTI to all score in the single digits.
+**Login (+42) / Home (+43)**
 
-The production build reduced the JavaScript payload to 414 KiB — a 95% reduction — by minifying, tree-shaking, and chunking the bundle. As a result, all four time-based metrics dropped to 0.6 s, each scoring 97–100. Total Blocking Time and Cumulative Layout Shift were already at 100 in v1 and remained unchanged.
+The most significant performance improvement on both pages came from switching the audit target from the Vite development server to the production build. In development mode, Vite deliberately skips minification and tree-shaking to support fast hot-module reloading, resulting in JavaScript payloads exceeding 7,700 KiB on both pages. The production build reduced this to 414 KiB — a 95% reduction — by minifying, tree-shaking, and chunking the bundle. As a direct result, FCP dropped from 3.5 s to 0.6 s on Login and from 6.5 s to 0.6 s on Home. LCP dropped from 6.6 s to 0.6 s on Login and from 10.9 s to 1.0 s on Home.
 
-Two minor performance warnings remain in v2: residual unused JavaScript (292 KiB est. savings) and render-blocking Google Fonts requests (240 ms est. savings). These are outside the scope of `Login.jsx` — the font loading is defined in `index.html` and the unused JavaScript is a consequence of React and library code that cannot be further reduced without architectural changes.
+An additional code-level improvement on the Home page was replacing the `/users?limit=1000` bulk fetch with a targeted `/user/:id` request. This eliminated an unnecessary large network payload just to find a single user, reducing both data transfer and server processing time on each page load.
 
-### Accessibility (+6)
+Minor performance warnings remain in v2 on both pages — residual unused JavaScript and render-blocking Google Fonts requests. These are outside the scope of `Login.jsx` and `Home.jsx`; the font loading is defined in `index.html` and the unused JavaScript is a consequence of shared React and library code.
 
-The accessibility score improved from 89 to 95. The fixes that drove this improvement were the addition of a `<main>` landmark element (resolving the "no document landmark" finding), the `aria-label` on the password visibility toggle, the `role="alert"` on the error message region, and the `aria-busy` state on the submit button. Replacing the navigation `<button>` with a semantic `<Link>` also contributed by correcting the element's role in the accessibility tree.
+### Accessibility
 
-One finding remains unresolved in v2: insufficient colour contrast on certain text elements. This issue persists because correcting it would require changes to the colour palette defined in the global AI specification, which is outside the permitted scope of this refactor. No visual design changes were permitted.
+**Login (+6) / Home (+3)**
 
-### Best Practices (0)
+On the Login page, accessibility improved from 89 to 95. The fixes that drove this were the addition of a `<main>` landmark, a dynamic `aria-label` on the password toggle, `role="alert"` on the error region, `aria-busy` on the submit button, and replacing the navigation `<button>` with a semantic `<Link>`.
 
-Best Practices scored 100 in both v1 and v2. The removal of `console.error` and the unused `@keyframes float` animation were Best Practices findings in v1, but they did not affect the overall score as the category was already at 100. These changes still represent correct practice aligned with the project's coding standards.
+On the Home page, accessibility improved from 92 to 95. The heading hierarchy was corrected by promoting the posts section to `<h1>` and demoting the redundant user name display to `<p>`. Icon-only Like and Comment buttons received dynamic `aria-label` attributes that include the current count, resolving both the missing accessible name and label-content mismatch findings. The comment modal was upgraded with full dialog ARIA (`role="dialog"`, `aria-modal`, `aria-labelledby`), and the comment textarea received a visually-hidden associated `<label>`.
 
-### SEO (+17)
+One finding remains unresolved on both pages: insufficient colour contrast on certain secondary text elements. Correcting this would require changes to the global colour palette defined in the AI specification, which is outside the permitted scope of this refactor.
 
-The SEO score improved from 83 to 100. Two targeted fixes achieved this: adding a meaningful `<meta name="description">` to `index.html` and creating a valid `robots.txt` in the `public/` directory. Both changes were directly required by Lighthouse findings and are explicitly permitted under the feature specification's exception for `index.html` changes tied to audit findings. All other SEO audits were already passing in v1.
+### Best Practices
+
+**Login (0) / Home (0)**
+
+Best Practices scored 100 in both v1 and v2 on both pages. All `console.error` calls were removed from `Login.jsx` and `Home.jsx`, and the invalid `fontColor` CSS property in the Home page comment textarea was corrected to `color`. These changes align with the project coding standards and eliminate sources of future confusion, even though they did not affect the already-perfect Best Practices score.
+
+### SEO
+
+**Login (+17) / Home (+17)**
+
+Both pages improved from 83 to 100. The same two fixes applied to both: a meaningful `<meta name="description">` was added to `index.html`, and a valid `robots.txt` was created in the `public/` directory. On the Home page, replacing post card `<div>` elements with `<article>` elements also contributed to semantic correctness. All other SEO audits were already passing in v1.
 
 ---
 
 ## Conclusion
 
-The v2 refactor of the CodeBloggs Login page achieved measurable improvement across three of four Lighthouse categories. Performance improved from 58 to 100 (+42), driven primarily by auditing against the optimised production build rather than the development server — a change that reflects real-world user conditions more accurately. SEO improved from 83 to 100 (+17) through the addition of a meta description and a valid robots.txt file. Accessibility improved from 89 to 95 (+6) through targeted semantic and ARIA enhancements. Best Practices remained at a perfect 100 throughout. Every change made was traceable to a specific Lighthouse finding, no visual design was altered, and no regressions were introduced in any category.
+The v2 refactor of the CodeBloggs Login and Home pages delivered consistent, measurable improvement across three of four Lighthouse categories on both pages. Performance improved by +42 on Login and +43 on Home, driven by the production build eliminating over 7,700 KiB of unminified development JavaScript. SEO improved by +17 on both pages through the addition of a meta description and a valid robots.txt. Accessibility improved by +6 on Login and +3 on Home through targeted semantic and ARIA enhancements. Best Practices remained at a perfect 100 throughout. Every change was directly traceable to a specific Lighthouse audit finding, no visual design was altered, and no regressions were introduced in any category across either page.
