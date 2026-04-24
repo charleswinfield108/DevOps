@@ -1,0 +1,1281 @@
+{
+  "id": "codebloggs-selenium-suite-v1",
+  "version": "2.0",
+  "name": "CodeBloggs Test Suite",
+  "url": "http://localhost:3000",
+  "tests": [
+    {
+      "id": "test-nav-01",
+      "name": "Navigate All Pages",
+      "commands": [
+        {
+          "id": "nav-01-c-pre",
+          "comment": "",
+          "command": "setWindowSize",
+          "target": "1280x800",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "nav-01-c01-pre",
+          "comment": "",
+          "command": "open",
+          "target": "/login",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "nav-01-c00",
+          "comment": "",
+          "command": "executeScript",
+          "target": "localStorage.clear(); sessionStorage.clear(); document.cookie = 'session_token=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/';",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "nav-01-c01",
+          "comment": "",
+          "command": "open",
+          "target": "/login",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "nav-01-c01b",
+          "comment": "",
+          "command": "waitForElementVisible",
+          "target": "id=email",
+          "targets": [],
+          "value": "8000"
+        },
+        {
+          "id": "nav-01-c02",
+          "comment": "",
+          "command": "assertElementPresent",
+          "target": "id=email",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "nav-01-c03",
+          "comment": "",
+          "command": "click",
+          "target": "linkText=Register now",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "nav-01-c04",
+          "comment": "",
+          "command": "assertElementPresent",
+          "target": "id=first_name",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "nav-01-c05",
+          "comment": "",
+          "command": "open",
+          "target": "/login",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "nav-01-c05b",
+          "comment": "",
+          "command": "waitForElementVisible",
+          "target": "id=email",
+          "targets": [],
+          "value": "8000"
+        },
+        {
+          "id": "nav-01-c06",
+          "comment": "",
+          "command": "executeScript",
+          "target": "var e=document.getElementById('email');var s=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set;s.call(e,'basic@basic.com');e.dispatchEvent(new Event('input',{bubbles:true}));",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "nav-01-c07",
+          "comment": "",
+          "command": "executeScript",
+          "target": "var e=document.getElementById('password');var s=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set;s.call(e,'basic');e.dispatchEvent(new Event('input',{bubbles:true}));",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "nav-01-c08",
+          "comment": "",
+          "command": "click",
+          "target": "css=button[type='submit']",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "nav-01-c09",
+          "comment": "",
+          "command": "waitForElementVisible",
+          "target": "linkText=Blogs",
+          "targets": [],
+          "value": "8000"
+        },
+        {
+          "id": "nav-01-c10",
+          "comment": "",
+          "command": "assertElementPresent",
+          "target": "linkText=Blogs",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "nav-01-c11",
+          "comment": "",
+          "command": "click",
+          "target": "linkText=Blogs",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "nav-01-c12",
+          "comment": "",
+          "command": "waitForElementVisible",
+          "target": "xpath=//h2[contains(text(),'All Blogs')]",
+          "targets": [],
+          "value": "8000"
+        },
+        {
+          "id": "nav-01-c13",
+          "comment": "",
+          "command": "assertElementPresent",
+          "target": "xpath=//h2[contains(text(),'All Blogs')]",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "nav-01-c14",
+          "comment": "",
+          "command": "click",
+          "target": "linkText=Network",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "nav-01-c15",
+          "comment": "",
+          "command": "waitForElementVisible",
+          "target": "xpath=//h2[contains(text(),'Community Members')]",
+          "targets": [],
+          "value": "8000"
+        },
+        {
+          "id": "nav-01-c16",
+          "comment": "",
+          "command": "assertElementPresent",
+          "target": "xpath=//h2[contains(text(),'Community Members')]",
+          "targets": [],
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": "test-form-01",
+      "name": "Login with Valid Credentials",
+      "commands": [
+        {
+          "id": "form-01-c-pre",
+          "comment": "",
+          "command": "setWindowSize",
+          "target": "1280x800",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "form-01-c01-pre",
+          "comment": "",
+          "command": "open",
+          "target": "/login",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "form-01-c00",
+          "comment": "",
+          "command": "executeScript",
+          "target": "localStorage.clear(); sessionStorage.clear(); document.cookie = 'session_token=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/';",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "form-01-c01",
+          "comment": "",
+          "command": "open",
+          "target": "/login",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "form-01-c01b",
+          "comment": "",
+          "command": "waitForElementVisible",
+          "target": "id=email",
+          "targets": [],
+          "value": "8000"
+        },
+        {
+          "id": "form-01-c02",
+          "comment": "",
+          "command": "executeScript",
+          "target": "var e=document.getElementById('email');var s=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set;s.call(e,'basic@basic.com');e.dispatchEvent(new Event('input',{bubbles:true}));",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "form-01-c03",
+          "comment": "",
+          "command": "executeScript",
+          "target": "var e=document.getElementById('password');var s=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set;s.call(e,'basic');e.dispatchEvent(new Event('input',{bubbles:true}));",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "form-01-c04",
+          "comment": "",
+          "command": "click",
+          "target": "css=button[type='submit']",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "form-01-c05",
+          "comment": "",
+          "command": "waitForElementVisible",
+          "target": "linkText=Blogs",
+          "targets": [],
+          "value": "8000"
+        },
+        {
+          "id": "form-01-c06",
+          "comment": "",
+          "command": "assertElementPresent",
+          "target": "linkText=Blogs",
+          "targets": [],
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": "test-form-02",
+      "name": "Register New User",
+      "commands": [
+        {
+          "id": "form-02-c-pre1",
+          "comment": "",
+          "command": "setWindowSize",
+          "target": "1280x800",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "form-02-c01-pre",
+          "comment": "",
+          "command": "open",
+          "target": "/register",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "form-02-c-pre2",
+          "comment": "",
+          "command": "executeScript",
+          "target": "localStorage.clear(); sessionStorage.clear(); document.cookie = 'session_token=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/';",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "form-02-c01",
+          "comment": "",
+          "command": "open",
+          "target": "/register",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "form-02-c00",
+          "comment": "",
+          "command": "executeScript",
+          "target": "var e='selenium.'+Date.now()+'@test.com'; localStorage.setItem('__regEmail',e); return e;",
+          "targets": [],
+          "value": "regEmail"
+        },
+        {
+          "id": "form-02-c02",
+          "comment": "",
+          "command": "executeScript",
+          "target": "var e=document.getElementById('first_name');var s=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set;s.call(e,'Selenium');e.dispatchEvent(new Event('input',{bubbles:true}));",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "form-02-c03",
+          "comment": "",
+          "command": "executeScript",
+          "target": "var e=document.getElementById('last_name');var s=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set;s.call(e,'Tester');e.dispatchEvent(new Event('input',{bubbles:true}));",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "form-02-c04",
+          "comment": "",
+          "command": "executeScript",
+          "target": "var email=localStorage.getItem('__regEmail');var e=document.getElementById('email');var s=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set;s.call(e,email);e.dispatchEvent(new Event('input',{bubbles:true}));",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "form-02-c05",
+          "comment": "",
+          "command": "executeScript",
+          "target": "var e=document.getElementById('birthdate');var s=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set;s.call(e,'2000-01-01');e.dispatchEvent(new Event('input',{bubbles:true}));",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "form-02-c06",
+          "comment": "",
+          "command": "executeScript",
+          "target": "var e=document.getElementById('password');var s=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set;s.call(e,'selenium123');e.dispatchEvent(new Event('input',{bubbles:true}));",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "form-02-c07",
+          "comment": "",
+          "command": "executeScript",
+          "target": "var e=document.getElementById('occupation');var s=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set;s.call(e,'QA Engineer');e.dispatchEvent(new Event('input',{bubbles:true}));",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "form-02-c08",
+          "comment": "",
+          "command": "executeScript",
+          "target": "var e=document.getElementById('location');var s=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set;s.call(e,'London');e.dispatchEvent(new Event('input',{bubbles:true}));",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "form-02-c09",
+          "comment": "",
+          "command": "click",
+          "target": "css=button[type='submit']",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "form-02-c10",
+          "comment": "",
+          "command": "waitForElementVisible",
+          "target": "xpath=//p[contains(text(),'Registration successful')]",
+          "targets": [],
+          "value": "8000"
+        },
+        {
+          "id": "form-02-c11",
+          "comment": "",
+          "command": "assertElementPresent",
+          "target": "xpath=//p[contains(text(),'Registration successful')]",
+          "targets": [],
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": "test-val-01",
+      "name": "Login Validation - Empty Fields",
+      "commands": [
+        {
+          "id": "val-01-c-pre",
+          "comment": "",
+          "command": "setWindowSize",
+          "target": "1280x800",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "val-01-c01-pre",
+          "comment": "",
+          "command": "open",
+          "target": "/login",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "val-01-c00",
+          "comment": "",
+          "command": "executeScript",
+          "target": "localStorage.clear(); sessionStorage.clear(); document.cookie = 'session_token=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/';",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "val-01-c01",
+          "comment": "",
+          "command": "open",
+          "target": "/login",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "val-01-c01b",
+          "comment": "",
+          "command": "waitForElementVisible",
+          "target": "id=email",
+          "targets": [],
+          "value": "8000"
+        },
+        {
+          "id": "val-01-c02",
+          "comment": "",
+          "command": "click",
+          "target": "css=button[type='submit']",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "val-01-c03",
+          "comment": "",
+          "command": "waitForElementVisible",
+          "target": "css=[role='alert']",
+          "targets": [],
+          "value": "5000"
+        },
+        {
+          "id": "val-01-c04",
+          "comment": "",
+          "command": "assertElementPresent",
+          "target": "css=[role='alert']",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "val-01-c05",
+          "comment": "",
+          "command": "assertElementPresent",
+          "target": "id=email",
+          "targets": [],
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": "test-val-02",
+      "name": "Login Validation - Wrong Credentials",
+      "commands": [
+        {
+          "id": "val-02-c-pre",
+          "comment": "",
+          "command": "setWindowSize",
+          "target": "1280x800",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "val-02-c01-pre",
+          "comment": "",
+          "command": "open",
+          "target": "/login",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "val-02-c00",
+          "comment": "",
+          "command": "executeScript",
+          "target": "localStorage.clear(); sessionStorage.clear(); document.cookie = 'session_token=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/';",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "val-02-c01",
+          "comment": "",
+          "command": "open",
+          "target": "/login",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "val-02-c01b",
+          "comment": "",
+          "command": "waitForElementVisible",
+          "target": "id=email",
+          "targets": [],
+          "value": "8000"
+        },
+        {
+          "id": "val-02-c02",
+          "comment": "",
+          "command": "executeScript",
+          "target": "var e=document.getElementById('email');var s=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set;s.call(e,'no_such_user_xyz@example.com');e.dispatchEvent(new Event('input',{bubbles:true}));",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "val-02-c03",
+          "comment": "",
+          "command": "executeScript",
+          "target": "var e=document.getElementById('password');var s=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set;s.call(e,'wrongpassword999');e.dispatchEvent(new Event('input',{bubbles:true}));",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "val-02-c04",
+          "comment": "",
+          "command": "click",
+          "target": "css=button[type='submit']",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "val-02-c05",
+          "comment": "",
+          "command": "waitForElementVisible",
+          "target": "css=[role='alert']",
+          "targets": [],
+          "value": "8000"
+        },
+        {
+          "id": "val-02-c06",
+          "comment": "",
+          "command": "assertElementPresent",
+          "target": "css=[role='alert']",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "val-02-c07",
+          "comment": "",
+          "command": "assertElementPresent",
+          "target": "id=email",
+          "targets": [],
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": "test-resp-01",
+      "name": "Layout Responsiveness Check",
+      "commands": [
+        {
+          "id": "resp-01-c01",
+          "comment": "",
+          "command": "setWindowSize",
+          "target": "1280x800",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "resp-01-c02-pre",
+          "comment": "",
+          "command": "open",
+          "target": "/login",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "resp-01-c00",
+          "comment": "",
+          "command": "executeScript",
+          "target": "localStorage.clear(); sessionStorage.clear(); document.cookie = 'session_token=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/';",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "resp-01-c02",
+          "comment": "",
+          "command": "open",
+          "target": "/login",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "resp-01-c02b",
+          "comment": "",
+          "command": "waitForElementVisible",
+          "target": "id=email",
+          "targets": [],
+          "value": "8000"
+        },
+        {
+          "id": "resp-01-c03",
+          "comment": "",
+          "command": "executeScript",
+          "target": "var e=document.getElementById('email');var s=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set;s.call(e,'basic@basic.com');e.dispatchEvent(new Event('input',{bubbles:true}));",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "resp-01-c04",
+          "comment": "",
+          "command": "executeScript",
+          "target": "var e=document.getElementById('password');var s=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set;s.call(e,'basic');e.dispatchEvent(new Event('input',{bubbles:true}));",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "resp-01-c05",
+          "comment": "",
+          "command": "click",
+          "target": "css=button[type='submit']",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "resp-01-c06",
+          "comment": "",
+          "command": "waitForElementVisible",
+          "target": "css=aside",
+          "targets": [],
+          "value": "8000"
+        },
+        {
+          "id": "resp-01-c07",
+          "comment": "",
+          "command": "assertElementPresent",
+          "target": "css=aside",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "resp-01-c08",
+          "comment": "",
+          "command": "assertElementPresent",
+          "target": "xpath=//button[contains(text(),'+ Create Post')]",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "resp-01-c09",
+          "comment": "",
+          "command": "setWindowSize",
+          "target": "375x812",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "resp-01-c10",
+          "comment": "",
+          "command": "assertElementPresent",
+          "target": "css=header",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "resp-01-c11",
+          "comment": "",
+          "command": "assertElementPresent",
+          "target": "css=#root",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "resp-01-c12",
+          "comment": "",
+          "command": "setWindowSize",
+          "target": "1280x800",
+          "targets": [],
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": "test-rep-01",
+      "name": "Full Login and Logout Workflow",
+      "commands": [
+        {
+          "id": "rep-01-c-pre",
+          "comment": "",
+          "command": "setWindowSize",
+          "target": "1280x800",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "rep-01-c01-pre",
+          "comment": "",
+          "command": "open",
+          "target": "/login",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "rep-01-c00",
+          "comment": "",
+          "command": "executeScript",
+          "target": "localStorage.clear(); sessionStorage.clear(); document.cookie = 'session_token=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/';",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "rep-01-c01",
+          "comment": "",
+          "command": "open",
+          "target": "/login",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "rep-01-c01b",
+          "comment": "",
+          "command": "waitForElementVisible",
+          "target": "id=email",
+          "targets": [],
+          "value": "15000"
+        },
+        {
+          "id": "rep-01-c02",
+          "comment": "",
+          "command": "executeScript",
+          "target": "var e=document.getElementById('email');var s=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set;s.call(e,'basic@basic.com');e.dispatchEvent(new Event('input',{bubbles:true}));",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "rep-01-c03",
+          "comment": "",
+          "command": "executeScript",
+          "target": "var e=document.getElementById('password');var s=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set;s.call(e,'basic');e.dispatchEvent(new Event('input',{bubbles:true}));",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "rep-01-c04",
+          "comment": "",
+          "command": "click",
+          "target": "css=button[type='submit']",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "rep-01-c05",
+          "comment": "",
+          "command": "waitForElementVisible",
+          "target": "linkText=Blogs",
+          "targets": [],
+          "value": "8000"
+        },
+        {
+          "id": "rep-01-c06",
+          "comment": "",
+          "command": "assertElementPresent",
+          "target": "linkText=Blogs",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "rep-01-c07",
+          "comment": "",
+          "command": "click",
+          "target": "xpath=//header//button[./span]",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "rep-01-c08",
+          "comment": "",
+          "command": "waitForElementVisible",
+          "target": "xpath=//button[.//span[text()='Logout']]",
+          "targets": [],
+          "value": "5000"
+        },
+        {
+          "id": "rep-01-c09",
+          "comment": "",
+          "command": "click",
+          "target": "xpath=//button[.//span[text()='Logout']]",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "rep-01-c10",
+          "comment": "",
+          "command": "waitForElementVisible",
+          "target": "id=email",
+          "targets": [],
+          "value": "8000"
+        },
+        {
+          "id": "rep-01-c11",
+          "comment": "",
+          "command": "assertElementPresent",
+          "target": "id=email",
+          "targets": [],
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": "test-rep-02",
+      "name": "Like a Post",
+      "commands": [
+        {
+          "id": "rep-02-c-pre",
+          "comment": "",
+          "command": "setWindowSize",
+          "target": "1280x800",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "rep-02-c01-pre",
+          "comment": "",
+          "command": "open",
+          "target": "/login",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "rep-02-c00",
+          "comment": "",
+          "command": "executeScript",
+          "target": "localStorage.clear(); sessionStorage.clear(); document.cookie = 'session_token=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/';",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "rep-02-c01",
+          "comment": "",
+          "command": "open",
+          "target": "/login",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "rep-02-c01b",
+          "comment": "",
+          "command": "waitForElementVisible",
+          "target": "id=email",
+          "targets": [],
+          "value": "8000"
+        },
+        {
+          "id": "rep-02-c02",
+          "comment": "",
+          "command": "executeScript",
+          "target": "var e=document.getElementById('email');var s=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set;s.call(e,'basic@basic.com');e.dispatchEvent(new Event('input',{bubbles:true}));",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "rep-02-c03",
+          "comment": "",
+          "command": "executeScript",
+          "target": "var e=document.getElementById('password');var s=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set;s.call(e,'basic');e.dispatchEvent(new Event('input',{bubbles:true}));",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "rep-02-c04",
+          "comment": "",
+          "command": "click",
+          "target": "css=button[type='submit']",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "rep-02-c05",
+          "comment": "",
+          "command": "waitForElementVisible",
+          "target": "css=article",
+          "targets": [],
+          "value": "8000"
+        },
+        {
+          "id": "rep-02-c05b",
+          "comment": "",
+          "command": "assertElementPresent",
+          "target": "css=article",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "rep-02-c06",
+          "comment": "",
+          "command": "click",
+          "target": "xpath=(//article)[1]//button[contains(@aria-label,'post,')]",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "rep-02-c07",
+          "comment": "",
+          "command": "waitForElementVisible",
+          "target": "css=article",
+          "targets": [],
+          "value": "5000"
+        },
+        {
+          "id": "rep-02-c08",
+          "comment": "",
+          "command": "assertElementPresent",
+          "target": "css=article",
+          "targets": [],
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": "test-rep-03",
+      "name": "Create a Post",
+      "commands": [
+        {
+          "id": "rep-03-c-pre",
+          "comment": "",
+          "command": "setWindowSize",
+          "target": "1280x800",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "rep-03-c01-pre",
+          "comment": "",
+          "command": "open",
+          "target": "/login",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "rep-03-c00",
+          "comment": "",
+          "command": "executeScript",
+          "target": "localStorage.clear(); sessionStorage.clear(); document.cookie = 'session_token=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/';",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "rep-03-c01",
+          "comment": "",
+          "command": "open",
+          "target": "/login",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "rep-03-c01b",
+          "comment": "",
+          "command": "waitForElementVisible",
+          "target": "id=email",
+          "targets": [],
+          "value": "8000"
+        },
+        {
+          "id": "rep-03-c02",
+          "comment": "",
+          "command": "executeScript",
+          "target": "var e=document.getElementById('email');var s=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set;s.call(e,'basic@basic.com');e.dispatchEvent(new Event('input',{bubbles:true}));",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "rep-03-c03",
+          "comment": "",
+          "command": "executeScript",
+          "target": "var e=document.getElementById('password');var s=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set;s.call(e,'basic');e.dispatchEvent(new Event('input',{bubbles:true}));",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "rep-03-c04",
+          "comment": "",
+          "command": "click",
+          "target": "css=button[type='submit']",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "rep-03-c05",
+          "comment": "",
+          "command": "waitForElementVisible",
+          "target": "xpath=//button[contains(text(),'+ Create Post')]",
+          "targets": [],
+          "value": "8000"
+        },
+        {
+          "id": "rep-03-c06",
+          "comment": "",
+          "command": "click",
+          "target": "xpath=//button[contains(text(),'+ Create Post')]",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "rep-03-c07",
+          "comment": "",
+          "command": "waitForElementVisible",
+          "target": "css=textarea",
+          "targets": [],
+          "value": "5000"
+        },
+        {
+          "id": "rep-03-c08",
+          "comment": "",
+          "command": "executeScript",
+          "target": "var e=document.querySelector('textarea');var s=Object.getOwnPropertyDescriptor(HTMLTextAreaElement.prototype,'value').set;s.call(e,'Selenium automated test post');e.dispatchEvent(new Event('input',{bubbles:true}));",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "rep-03-c09",
+          "comment": "",
+          "command": "click",
+          "target": "xpath=//button[contains(text(),'Post') and not(contains(text(),'Create'))]",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "rep-03-c10",
+          "comment": "",
+          "command": "waitForElementNotPresent",
+          "target": "css=textarea",
+          "targets": [],
+          "value": "8000"
+        },
+        {
+          "id": "rep-03-c11",
+          "comment": "",
+          "command": "assertElementPresent",
+          "target": "css=article",
+          "targets": [],
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": "test-rep-04",
+      "name": "Register and Login with New Account",
+      "commands": [
+        {
+          "id": "rep-04-c-pre1",
+          "comment": "",
+          "command": "setWindowSize",
+          "target": "1280x800",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "rep-04-c01-pre",
+          "comment": "",
+          "command": "open",
+          "target": "/register",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "rep-04-c-pre2",
+          "comment": "",
+          "command": "executeScript",
+          "target": "localStorage.clear(); sessionStorage.clear(); document.cookie = 'session_token=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/';",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "rep-04-c01",
+          "comment": "",
+          "command": "open",
+          "target": "/register",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "rep-04-c00",
+          "comment": "",
+          "command": "executeScript",
+          "target": "var e='testaccount.'+Date.now()+'@selenium.com'; localStorage.setItem('__newAccEmail',e); return e;",
+          "targets": [],
+          "value": "newAccEmail"
+        },
+        {
+          "id": "rep-04-c02",
+          "comment": "",
+          "command": "executeScript",
+          "target": "var e=document.getElementById('first_name');var s=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set;s.call(e,'Test');e.dispatchEvent(new Event('input',{bubbles:true}));",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "rep-04-c03",
+          "comment": "",
+          "command": "executeScript",
+          "target": "var e=document.getElementById('last_name');var s=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set;s.call(e,'Account');e.dispatchEvent(new Event('input',{bubbles:true}));",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "rep-04-c04",
+          "comment": "",
+          "command": "executeScript",
+          "target": "var email=localStorage.getItem('__newAccEmail');var e=document.getElementById('email');var s=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set;s.call(e,email);e.dispatchEvent(new Event('input',{bubbles:true}));",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "rep-04-c05",
+          "comment": "",
+          "command": "executeScript",
+          "target": "var e=document.getElementById('birthdate');var s=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set;s.call(e,'1995-06-15');e.dispatchEvent(new Event('input',{bubbles:true}));",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "rep-04-c06",
+          "comment": "",
+          "command": "executeScript",
+          "target": "var e=document.getElementById('password');var s=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set;s.call(e,'testpass123');e.dispatchEvent(new Event('input',{bubbles:true}));",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "rep-04-c07",
+          "comment": "",
+          "command": "executeScript",
+          "target": "var e=document.getElementById('occupation');var s=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set;s.call(e,'Tester');e.dispatchEvent(new Event('input',{bubbles:true}));",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "rep-04-c08",
+          "comment": "",
+          "command": "executeScript",
+          "target": "var e=document.getElementById('location');var s=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set;s.call(e,'Manchester');e.dispatchEvent(new Event('input',{bubbles:true}));",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "rep-04-c09",
+          "comment": "",
+          "command": "click",
+          "target": "css=button[type='submit']",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "rep-04-c10",
+          "comment": "",
+          "command": "waitForElementVisible",
+          "target": "xpath=//p[contains(text(),'Registration successful')]",
+          "targets": [],
+          "value": "8000"
+        },
+        {
+          "id": "rep-04-c11",
+          "comment": "",
+          "command": "waitForElementVisible",
+          "target": "linkText=Register now",
+          "targets": [],
+          "value": "12000"
+        },
+        {
+          "id": "rep-04-c12",
+          "comment": "",
+          "command": "executeScript",
+          "target": "var email=localStorage.getItem('__newAccEmail');var e=document.getElementById('email');var s=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set;s.call(e,email);e.dispatchEvent(new Event('input',{bubbles:true}));",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "rep-04-c13",
+          "comment": "",
+          "command": "executeScript",
+          "target": "var e=document.getElementById('password');var s=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set;s.call(e,'testpass123');e.dispatchEvent(new Event('input',{bubbles:true}));",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "rep-04-c14",
+          "comment": "",
+          "command": "click",
+          "target": "css=button[type='submit']",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "rep-04-c15",
+          "comment": "",
+          "command": "waitForElementVisible",
+          "target": "css=aside",
+          "targets": [],
+          "value": "15000"
+        },
+        {
+          "id": "rep-04-c16",
+          "comment": "",
+          "command": "assertElementPresent",
+          "target": "css=aside",
+          "targets": [],
+          "value": ""
+        }
+      ]
+    }
+  ],
+  "suites": [
+    {
+      "id": "suite-01",
+      "name": "01 - Navigation",
+      "persistSession": false,
+      "parallel": false,
+      "timeout": 300,
+      "tests": [
+        "test-nav-01"
+      ]
+    },
+    {
+      "id": "suite-02",
+      "name": "02 - Form Submission",
+      "persistSession": false,
+      "parallel": false,
+      "timeout": 300,
+      "tests": [
+        "test-form-01",
+        "test-form-02"
+      ]
+    },
+    {
+      "id": "suite-03",
+      "name": "03 - Form Validation",
+      "persistSession": false,
+      "parallel": false,
+      "timeout": 300,
+      "tests": [
+        "test-val-01",
+        "test-val-02"
+      ]
+    },
+    {
+      "id": "suite-04",
+      "name": "04 - Responsiveness",
+      "persistSession": false,
+      "parallel": false,
+      "timeout": 300,
+      "tests": [
+        "test-resp-01"
+      ]
+    },
+    {
+      "id": "suite-05",
+      "name": "05 - Repetitive Tasks",
+      "persistSession": false,
+      "parallel": false,
+      "timeout": 300,
+      "tests": [
+        "test-rep-01",
+        "test-rep-02",
+        "test-rep-03",
+        "test-rep-04"
+      ]
+    }
+  ],
+  "urls": [
+    "http://localhost:3000"
+  ],
+  "plugins": []
+}
